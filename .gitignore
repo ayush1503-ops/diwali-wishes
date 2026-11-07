@@ -22,6 +22,9 @@ client/.env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
+server/err.log
+server/out.log
 
 # OS
 .DS_Store
