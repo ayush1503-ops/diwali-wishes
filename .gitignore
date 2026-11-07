@@ -3,6 +3,11 @@ node_modules/
 .pnp
 .pnp.js
 
+# Lock files (regenerated on install)
+package-lock.json
+client/package-lock.json
+server/package-lock.json
+
 # Build outputs
 client/dist/
 server/dist/
