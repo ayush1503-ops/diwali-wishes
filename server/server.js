@@ -34,13 +34,17 @@ const PORT = process.env.PORT || 5000;
 
 // Security middleware
 app.use(helmet());
+app.set("trust proxy", 1);
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: process.env.CLIENT_URL || "*",
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json({ limit: "10kb" }));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 // Rate limiting

@@ -2,6 +2,7 @@ import { supabase } from "../config/supabase.js";
 import { getZodiacSign, ZODIAC_NAMES, LUCKY_DETAILS } from "../utils/zodiac.js";
 import { generateSlug } from "../utils/generateSlug.js";
 import { generateAIPersonalizedWish } from "../utils/groqWish.js";
+import { isSupabaseConfigured } from "../config/supabase.js";
 
 /**
  * POST /api/wishes/generate
@@ -10,6 +11,12 @@ import { generateAIPersonalizedWish } from "../utils/groqWish.js";
  */
 export const generateWish = async (req, res) => {
   try {
+    if (!isSupabaseConfigured()) {
+      return res.status(500).json({
+        message:
+          "Supabase not configured. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in environment variables.",
+      });
+    }
     const {
       recipientName,
       birthdate,

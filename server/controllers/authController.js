@@ -1,4 +1,4 @@
-import { supabase } from "../config/supabase.js";
+import { supabase, isSupabaseConfigured } from "../config/supabase.js";
 import jwt from "jsonwebtoken";
 
 /**
@@ -7,6 +7,13 @@ import jwt from "jsonwebtoken";
  */
 export const register = async (req, res) => {
   try {
+    if (!isSupabaseConfigured()) {
+      return res.status(500).json({
+        message:
+          "Supabase not configured. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in environment variables.",
+      });
+    }
+
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -47,6 +54,10 @@ export const register = async (req, res) => {
     }
 
     // Generate JWT for our app
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ message: "JWT_SECRET not configured" });
+    }
+
     const token = jwt.sign({ id: authData.user.id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN || "7d",
     });
@@ -59,7 +70,8 @@ export const register = async (req, res) => {
       token,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Register error:", error);
+    res.status(500).json({ message: error.message || "Registration failed" });
   }
 };
 
@@ -69,7 +81,18 @@ export const register = async (req, res) => {
  */
 export const login = async (req, res) => {
   try {
+    if (!isSupabaseConfigured()) {
+      return res.status(500).json({
+        message:
+          "Supabase not configured. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in environment variables.",
+      });
+    }
+
     const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "Please add email and password" });
+    }
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -87,6 +110,10 @@ export const login = async (req, res) => {
       .eq("id", data.user.id)
       .single();
 
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ message: "JWT_SECRET not configured" });
+    }
+
     const token = jwt.sign({ id: data.user.id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN || "7d",
     });
@@ -99,7 +126,8 @@ export const login = async (req, res) => {
       token,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Login error:", error);
+    res.status(500).json({ message: error.message || "Login failed" });
   }
 };
 
@@ -108,10 +136,21 @@ export const login = async (req, res) => {
  */
 export const forgotPassword = async (req, res) => {
   try {
+    if (!isSupabaseConfigured()) {
+      return res.status(500).json({
+        message:
+          "Supabase not configured. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in environment variables.",
+      });
+    }
+
     const { email } = req.body;
 
+    if (!email) {
+      return res.status(400).json({ message: "Please provide an email" });
+    }
+
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${process.env.CLIENT_URL}/reset-password`,
+      redirectTo: `${process.env.CLIENT_URL || "http://localhost:5173"}/reset-password`,
     });
 
     if (error) {
@@ -120,6 +159,7 @@ export const forgotPassword = async (req, res) => {
 
     res.json({ message: "Password reset link sent to your email" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Forgot password error:", error);
+    res.status(500).json({ message: error.message || "Forgot password failed" });
   }
 };
