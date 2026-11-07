@@ -5,7 +5,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 
-import { getSupabase } from "./config/supabase.js";
+import { getSupabase, isSupabaseConfigured } from "./config/supabase.js";
 import authRoutes from "./routes/authRoutes.js";
 import wishRoutes from "./routes/wishRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
@@ -53,7 +53,12 @@ app.use("/api/", limiter);
 
 // Health check
 app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", service: "diwaliwish-api", database: "supabase" });
+  res.json({
+    status: "ok",
+    service: "diwaliwish-api",
+    database: "supabase",
+    supabaseConfigured: isSupabaseConfigured(),
+  });
 });
 
 // API routes
