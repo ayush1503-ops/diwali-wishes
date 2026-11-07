@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DiwaliWish Design System — Interactive Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../tokens/colors_and_type.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ========================================================================
+       DiwaliWish Design System — Showcase Styles
+       ======================================================================== */
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-family: var(--dw-font-body);
+      font-weight: var(--dw-fw-regular);
+      line-height: var(--dw-lh-normal);
+      background: var(--dw-bg-primary);
+      color: var(--dw-fg-primary);
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .dw-heading {
+      font-family: var(--dw-font-heading);
+      font-weight: var(--dw-fw-bold);
+      line-height: var(--dw-lh-tight);
+      letter-spacing: var(--dw-ls-tight);
+    }
+
+    /* Accessibility: reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ========================================================================
+       Navigation
+       ======================================================================== */
+
+    .dw-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(14,10,30,0.6), transparent);
+      backdrop-filter: blur(12px);
+    }
+
+    .dw-nav__logo {
+      font-family: var(--dw-font-heading);
+      font-size: var(--dw-text-xl);
+      font-weight: var(--dw-fw-bold);
+      color: var(--dw-fg-primary);
+      text-decoration: none;
+      letter-spacing: var(--dw-ls-tight);
+    }
+
+    .dw-nav__logo span {
+      color: var(--dw-accent-gold);
+    }
+
+    .dw-nav__links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .dw-nav__links a {
+      color: var(--dw-fg-secondary);
+      text-decoration: none;
+      font-size: var(--dw-text-sm);
+      font-weight: var(--dw-fw-medium);
+      font-family: var(--dw-font-body);
+      transition: color var(--dw-duration-normal) var(--dw-ease-standard);
+      cursor: pointer;
+    }
+
+    .dw-nav__links a:hover {
+      color: var(--dw-accent-gold);
+    }
+
+    /* ========================================================================
+       Hero Section
+       ======================================================================== */
+
+    .dw-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      overflow: hidden;
+    }
+
+    .dw-hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at 30% 40%, rgba(212,175,55,0.12), transparent 40%),
+                  radial-gradient(circle at 70% 70%, rgba(62,10,20,0.25), transparent 50%);
+      background-color: var(--dw-bg-primary);
+    }
+
+    .dw-hero__content {
+      max-width: 720px;
+    }
+
+    .dw-hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid var(--dw-border-gold);
+      color: var(--dw-accent-gold);
+      font-family: var(--dw-font-body);
+      font-size: var(--dw-text-xs);
+      font-weight: var(--dw-fw-medium);
+      border-radius: var(--dw-radius-full);
+      margin-bottom: 1.5rem;
+      letter-spacing: var(--dw-ls-wide);
+    }
+
+    .dw-hero h1 {
+      font-size: var(--dw-text-4xl);
+      color: var(--dw-fg-primary);
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .dw-hero h1 span {
+      color: var(--dw-accent-gold);
+    }
+
+    .dw-hero p {
+      font-size: var(--dw-text-lg);
+      color: var(--dw-fg-secondary);
+      margin-bottom: 2.5rem;
+      font-weight: var(--dw-fw-medium);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .dw-hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: var(--dw-accent-gold);
+      color: var(--dw-text-ink);
+      font-family: var(--dw-font-heading);
+      font-weight: var(--dw-fw-bold);
+      font-size: var(--dw-text-lg);
+      border: none;
+      border-radius: var(--dw-radius-lg);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--dw-duration-normal) var(--dw-ease-standard);
+      box-shadow: var(--dw-shadow-glow);
+    }
+
+    .dw-hero__cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(212,175,55,0.4);
+    }
+
+    .dw-hero__cta:active {
+      transform: scale(0.98);
+    }
+
+    /* ========================================================================
+       Diya Animation
+       ======================================================================== */
+
+    .dw-diya {
+      position: relative;
+      width: 64px;
+      height: 80px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin: 0 auto 2rem;
+    }
+
+    .dw-diya__body {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .dw-diya__reservoir {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 45%;
+      background: #3E0A14;
+      border: 2px solid var(--dw-border-gold);
+      border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+      box-shadow: inset 0 2px 4px rgba(212,175,55,0.2);
+    }
+
+    .dw-diya__wick {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12%;
+      height: 22%;
+      background: #5A4A3A;
+      border-radius: 2px;
+    }
+
+    .dw-diya__flame {
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 32px;
+      background: #FF9F00;
+      border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+      filter: blur(2px);
+      animation: dw-flicker var(--dw-flicker-duration) ease-in-out infinite;
+    }
+
+    .dw-diya__glow {
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, rgba(212,175,55,0.4), transparent 70%);
+      border-radius: 50%;
+      animation: dw-glow-pulse 4s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes dw-flicker {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+      25% { transform: translateX(-50%) scale(0.95); opacity: 0.85; }
+      50% { transform: translateX(-50%) scale(1.05); opacity: 1; }
+      75% { transform: translateX(-50%) scale(0.98); opacity: 0.9; }
+    }
+
+    @keyframes dw-glow-pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.4; }
+      50% { transform: translateX(-50%) scale(1.3); opacity: 0.7; }
+    }
+
+    /* ========================================================================
+       Floating Golden Particles
+       ======================================================================== */
+
+    .dw-particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .dw-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #D4AF37;
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(212,175,55,0.6);
+      animation: dw-float linear infinite;
+    }
+
+    @keyframes dw-float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ========================================================================
+       Sections
+       ======================================================================== */
+
+    .dw-section {
+      padding: 6rem 1.5rem;
+      position: relative;
+    }
+
+    .dw-section--maroon {
+      background: var(--dw-bg-secondary);
+      color: var(--dw-fg-primary);
+    }
+
+    .dw-section__header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 4rem;
+    }
+
+    .dw-section__header h2 {
+      font-size: var(--dw-text-3xl);
+      margin-bottom: 1rem;
+    }
+
+    .dw-section__header p {
+      color: var(--dw-fg-secondary);
+      font-size: var(--dw-text-lg);
+    }
+
+    /* ========================================================================
+       Feature Grid
+       ======================================================================== */
+
+    .dw-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .dw-feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--dw-border-gold);
+      border-radius: var(--dw-radius-lg);
+      padding: 2.5rem 2rem;
+      transition: all var(--dw-duration-normal) var(--dw-ease-standard);
+      cursor: default;
+    }
+
+    .dw-feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--dw-accent-gold);
+      box-shadow: var(--dw-shadow-glow);
+    }
+
+    .dw-feature-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(212,175,55,0.15);
+      border-radius: var(--dw-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--dw-accent-gold);
+    }
+
+    .dw-feature-card h3 {
+      font-size: var(--dw-text-xl);
+      margin-bottom: 0.75rem;
+    }
+
+    .dw-feature-card p {
+      color: var(--dw-fg-secondary);
+      font-size: var(--dw-text-base);
+      line-height: var(--dw-lh-relaxed);
+    }
+
+    /* ========================================================================
+       Theme Preview
+       ======================================================================== */
+
+    .dw-themes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .dw-theme-card {
+      height: 200px;
+      border-radius: var(--dw-radius-lg);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform var(--dw-duration-normal) var(--dw-ease-standard);
+      border: 2px solid transparent;
+    }
+
+    .dw-theme-card:hover {
+      transform: scale(1.03);
+      border-color: var(--dw-accent-gold);
+    }
+
+    .dw-theme-card__content {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      color: var(--dw-fg-primary);
+    }
+
+    .dw-theme-card__name {
+      font-family: var(--dw-font-heading);
+      font-size: var(--dw-text-lg);
+      font-weight: var(--dw-fw-bold);
+      margin-bottom: 0.25rem;
+    }
+
+    .dw-theme-card__desc {
+      font-size: var(--dw-text-sm);
+      opacity: 0.9;
+    }
+
+    .dw-theme--royal-gold { background: linear-gradient(135deg, #1A0A2E 0%, #4A0E1E 100%); }
+    .dw-theme--traditional-diya { background: linear-gradient(135deg, #3E0A14 0%, #1A0A2E 100%); }
+    .dw-theme--modern-neon { background: linear-gradient(135deg, #0E0A1E 0%, #2D1B3E 100%); }
+    .dw-theme--rangoli { background: linear-gradient(135deg, #4A0E1E 0%, #1A0A2E 100%); }
+    .dw-theme--fireworks { background: linear-gradient(135deg, #1A0A2E 0%, #3E0A14 100%); }
+
+    /* ========================================================================
+       Greeting Card (Wish Card)
+       ======================================================================== */
+
+    .dw-card-showcase {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (min-width: 768px) {
+      .dw-card-showcase {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .dw-wish-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: var(--dw-radius-xl);
+      background: var(--dw-surface-card);
+      border: 1px solid var(--dw-border-default);
+      box-shadow: var(--dw-shadow-lg);
+      overflow: hidden;
+      perspective: 1000px;
+    }
+
+    .dw-wish-card__front,
+    .dw-wish-card__back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      transition: transform var(--dw-duration-cinematic) var(--dw-ease-expo);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    .dw-wish-card__back {
+      transform: rotateY(180deg);
+      background: var(--dw-bg-primary);
+      color: var(--dw-fg-primary);
+    }
+
+    .dw-wish-card--flipped .dw-wish-card__front {
+      transform: rotateY(180deg);
+    }
+
+    .dw-wish-card--flipped .dw-wish-card__back {
+      transform: rotateY(0deg);
+    }
+
+    .dw-wish-card__diya-wrapper {
+      margin-bottom: 1.5rem;
+    }
+
+    .dw-wish-card__title {
+      font-size: var(--dw-text-2xl);
+      color: var(--dw-text-ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .dw-wish-card__divider {
+      width: 40px;
+      height: 2px;
+      background: var(--dw-accent-gold);
+      margin: 1rem auto;
+      border-radius: 2px;
+    }
+
+    .dw-wish-card__details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .dw-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .dw-detail__label {
+      font-size: var(--dw-text-xs);
+      color: var(--dw-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .dw-detail__value {
+      font-family: var(--dw-font-heading);
+      font-size: var(--dw-text-lg);
+      color: var(--dw-text-ink);
+    }
+
+    .dw-wish-card__prediction {
+      font-style: italic;
+      color: var(--dw-text-muted);
+      margin-bottom: 1rem;
+      font-size: var(--dw-text-base);
+    }
+
+    .dw-wish-card__wish {
+      color: var(--dw-text-ink);
+      font-size: var(--dw-text-lg);
+      font-weight: var(--dw-fw-medium);
+      line-height: var(--dw-lh-relaxed);
+    }
+
+    .dw-wish-card__back-title {
+      font-family: var(--dw-font-heading);
+      font-size: var(--dw-text-2xl);
+      margin-bottom: 1rem;
+    }
+
+    .dw-wish-card__back-message {
+      color: var(--dw-fg-secondary);
+      margin-bottom: 2rem;
+      font-size: var(--dw-text-base);
+    }
+
+    .dw-card-controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    /* ========================================================================
+       Buttons
+       ======================================================================== */
+
+    .dw-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      font-family: var(--dw-font-heading);
+      font-weight: var(--dw-fw-bold);
+      font-size: var(--dw-text-base);
+      border: none;
+      border-radius: var(--dw-radius-md);
+      cursor: pointer;
+      transition: all var(--dw-duration-normal) var(--dw-ease-standard);
+      text-decoration: none;
+    }
+
+    .dw-btn--primary {
+      background: var(--dw-accent-gold);
+      color: var(--dw-text-ink);
+      box-shadow: var(--dw-shadow-glow);
+    }
+
+    .dw-btn--primary:hover {
+      background: #E6C866;
+      transform: translateY(-1px);
+    }
+
+    .dw-btn--primary:active {
+      transform: scale(0.98);
+    }
+
+    .dw-btn--ghost {
+      background: transparent;
+      color: var(--dw-fg-primary);
+      border: 1px solid var(--dw-border-gold);
+    }
+
+    .dw-btn--ghost:hover {
+      background: rgba(212,175,55,0.1);
+    }
+
+    .dw-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ========================================================================
+       Animations
+       ======================================================================== */
+
+    .dw-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .dw-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s var(--dw-ease-standard), transform 0.8s var(--dw-ease-standard);
+    }
+
+    /* ========================================================================
+       Footer
+       ======================================================================== */
+
+    .dw-footer {
+      padding: 4rem 1.5rem 2rem;
+      border-top: 1px solid var(--dw-border-gold);
+      text-align: center;
+      color: var(--dw-fg-secondary);
+      font-size: var(--dw-text-sm);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="dw-nav">
+    <a href="#" class="dw-nav__logo">Diwali<span>Wish</span></a>
+    <ul class="dw-nav__links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#themes">Themes</a></li>
+      <li><a href="#card-preview">Greeting Card</a></li>
+    </ul>
+  </nav>
+
+  <!-- Floating particles container -->
+  <div class="dw-particles" id="dw-particles"></div>
+
+  <!-- Hero -->
+  <section class="dw-hero dw-reveal">
+    <div class="dw-hero__content">
+      <div class="dw-diya dw-hero__diya">
+        <div class="dw-diya__body">
+          <div class="dw-diya__reservoir"></div>
+          <div class="dw-diya__wick"></div>
+        </div>
+        <div class="dw-diya__flame"></div>
+        <div class="dw-diya__glow"></div>
+      </div>
+      <div class="dw-hero__badge">Premium &bull; Festive &bull; Personalized</div>
+      <h1>Light up Diwali with a wish made just for <span>you</span>.</h1>
+      <p>Enter your name and birthdate to receive a personalized Diwali greeting with zodiac prediction, lucky color, lucky number, and a downloadable greeting card.</p>
+      <button class="dw-btn dw-btn--primary dw-hero__cta" onclick="document.getElementById('card-preview').scrollIntoView({behavior:'smooth'})">
+        Create My Diwali Wish
+      </button>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="dw-section dw-reveal">
+    <div class="dw-section__header">
+      <h2>Personalized for every celebration</h2>
+      <p>From name and birthdate to zodiac sign, lucky details, and a cinematic greeting card.</p>
+    </div>
+    <div class="dw-features">
+      <div class="dw-feature-card">
+        <div class="dw-feature-icon" aria-hidden="true">★</div>
+        <h3>Personalized Wishes</h3>
+        <p>Every greeting uses your name, birthdate, zodiac sign, and lucky details.</p>
+      </div>
+      <div class="dw-feature-card">
+        <div class="dw-feature-icon" aria-hidden="true">✦</div>
+        <h3>Fun Predictions</h3>
+        <p>Zodiac-based fun prediction with personality trait and lucky flower.</p>
+      </div>
+      <div class="dw-feature-card">
+        <div class="dw-feature-icon" aria-hidden="true">✧</div>
+        <h3>Five Festive Themes</h3>
+        <p>Royal Gold, Traditional Diya, Modern Neon, Rangoli, or Fireworks.</p>
+      </div>
+      <div class="dw-feature-card">
+        <div class="dw-feature-icon" aria-hidden="true">◆</div>
+        <h3>Download & Share</h3>
+        <p>Download your card as an image or share via WhatsApp and copy link.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Themes -->
+  <section id="themes" class="dw-section dw-section--maroon dw-reveal">
+    <div class="dw-section__header">
+      <h2>Choose your Diwali theme</h2>
+      <p>Each theme transforms the card with distinct colors, lighting, and decorative details.</p>
+    </div>
+    <div class="dw-themes">
+      <div class="dw-theme-card dw-theme--royal-gold">
+        <div class="dw-theme-card__content">
+          <div class="dw-theme-card__name">Royal Gold</div>
+          <div class="dw-theme-card__desc">Deep midnight purple with rich gold accents</div>
+        </div>
+      </div>
+      <div class="dw-theme-card dw-theme--traditional-diya">
+        <div class="dw-theme-card__content">
+          <div class="dw-theme-card__name">Traditional Diya</div>
+          <div class="dw-theme-card__desc">Warm maroon with diya-inspired glow</div>
+        </div>
+      </div>
+      <div class="dw-theme-card dw-theme--modern-neon">
+        <div class="dw-theme-card__content">
+          <div class="dw-theme-card__name">Modern Neon</div>
+          <div class="dw-theme-card__desc">Saffron and amber on dark midnight</div>
+        </div>
+      </div>
+      <div class="dw-theme-card dw-theme--rangoli">
+        <div class="dw-theme-card__content">
+          <div class="dw-theme-card__name">Rangoli</div>
+          <div class="dw-theme-card__desc">Geometric festive patterns and textures</div>
+        </div>
+      </div>
+      <div class="dw-theme-card dw-theme--fireworks">
+        <div class="dw-theme-card__content">
+          <div class="dw-theme-card__name">Fireworks</div>
+          <div class="dw-theme-card__desc">Sparkling celebratory lighting effects</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Greeting Card Preview -->
+  <section id="card-preview" class="dw-section dw-reveal">
+    <div class="dw-section__header">
+      <h2>Cinematic Greeting Card</h2>
+      <p>Preview your personalized wish with diya flicker, card flip, and download.</p>
+    </div>
+    <div class="dw-card-showcase">
+      <div class="dw-wish-card" id="dw-wish-card">
+        <div class="dw-wish-card__front">
+          <div class="dw-wish-card__diya-wrapper">
+            <div class="dw-diya" style="width: 48px; height: 60px;">
+              <div class="dw-diya__body">
+                <div class="dw-diya__reservoir" style="width: 60%; height: 45%; bottom: 0; left: 50%; transform: translateX(-50%); position: absolute; background: #3E0A14; border: 2px solid var(--dw-border-gold); border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%; box-shadow: inset 0 2px 4px rgba(212,175,55,0.2);"></div>
+                <div class="dw-diya__wick" style="width: 12%; height: 22%; top: 10%; left: 50%; transform: translateX(-50%); position: absolute; background: #5A4A3A; border-radius: 2px;"></div>
+              </div>
+              <div class="dw-diya__flame" style="width: 20px; height: 28px; top: -40%; left: 50%; transform: translateX(-50%); position: absolute; background: #FF9F00; border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%; filter: blur(2px); animation: dw-flicker 3s ease-in-out infinite;"></div>
+              <div class="dw-diya__glow" style="width: 50px; height: 50px; top: -50%; left: 50%; transform: translateX(-50%); position: absolute; background: radial-gradient(circle, rgba(212,175,55,0.4), transparent 70%); border-radius: 50%; animation: dw-glow-pulse 4s ease-in-out infinite; z-index: -1;"></div>
+            </div>
+          </div>
+          <h1 class="dw-wish-card__title">Happy Diwali, Aarav!</h1>
+          <div class="dw-wish-card__divider"></div>
+          <div class="dw-wish-card__details">
+            <div class="dw-detail">
+              <span class="dw-detail__label">Zodiac Sign</span>
+              <span class="dw-detail__value">Leo</span>
+            </div>
+            <div class="dw-detail">
+              <span class="dw-detail__label">Lucky Color</span>
+              <span class="dw-detail__value">Gold</span>
+            </div>
+            <div class="dw-detail">
+              <span class="dw-detail__label">Lucky Number</span>
+              <span class="dw-detail__value">7</span>
+            </div>
+            <div class="dw-detail">
+              <span class="dw-detail__label">Personality</span>
+              <span class="dw-detail__value">Confident Leader</span>
+            </div>
+          </div>
+          <p class="dw-wish-card__prediction">Your confidence will open exciting doors for you this year.</p>
+          <p class="dw-wish-card__wish">May your life shine as brightly as a thousand diyas. Wishing you happiness, prosperity, and beautiful memories.</p>
+        </div>
+        <div class="dw-wish-card__back">
+          <h2 class="dw-wish-card__back-title">From the Heart</h2>
+          <p class="dw-wish-card__back-message">This wish was created just for you, Aarav. May your Diwali be filled with light, joy, and prosperity.</p>
+          <button class="dw-btn dw-btn--primary dw-wish-card__download">Download Card</button>
+        </div>
+      </div>
+      <div class="dw-card-controls">
+        <button class="dw-btn dw-btn--ghost" onclick="toggleCard()" id="dw-card-flip-btn">Flip Card</button>
+        <button class="dw-btn dw-btn--primary" onclick="alert('Card downloaded as PNG (preview only)')">Download Card</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="dw-footer">
+    <p>DiwaliWish &mdash; Personalized Diwali Wishes &amp; Fun Predictions</p>
+    <p style="margin-top: 0.5rem; font-size: var(--dw-text-xs); opacity: 0.7;">Premium &bull; Festive &bull; Accessible &bull; Responsive</p>
+  </footer>
+
+  <script>
+    // ========================================================================
+    // Floating Golden Particles
+    // ========================================================================
+    function createParticles() {
+      const container = document.getElementById('dw-particles');
+      const particleCount = 18;
+      for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement('div');
+        p.className = 'dw-particle';
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.top = Math.random() * 100 + 'vh';
+        p.style.animationDuration = (6 + Math.random() * 8) + 's';
+        p.style.animationDelay = Math.random() * 8 + 's';
+        p.style.opacity = Math.random() * 0.6 + 0.2;
+        container.appendChild(p);
+      }
+    }
+
+    // ========================================================================
+    // Card Flip Toggle
+    // ========================================================================
+    let isFlipped = false;
+    function toggleCard() {
+      const card = document.getElementById('dw-wish-card');
+      const btn = document.getElementById('dw-card-flip-btn');
+      isFlipped = !isFlipped;
+      if (isFlipped) {
+        card.classList.add('dw-wish-card--flipped');
+        btn.textContent = 'Flip Back';
+      } else {
+        card.classList.remove('dw-wish-card--flipped');
+        btn.textContent = 'Flip Card';
+      }
+    }
+
+    // ========================================================================
+    // Scroll Reveal (IntersectionObserver, respects prefers-reduced-motion)
+    // ========================================================================
+    function initScrollReveal() {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (prefersReduced) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'none';
+            } else {
+              entry.target.classList.add('revealed');
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.dw-reveal').forEach(el => observer.observe(el));
+    }
+
+    // ========================================================================
+    // Initialize
+    // ========================================================================
+    createParticles();
+    initScrollReveal();
+  </script>
+</body>
+</html>

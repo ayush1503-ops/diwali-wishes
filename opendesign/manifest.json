@@ -1,0 +1,49 @@
+{
+  "generated": "2026-11-07T00:00:00.000Z",
+  "sections": [
+    {
+      "id": "mockups",
+      "label": "Mockups",
+      "groups": [
+        {
+          "slug": "diwaliwish-screens",
+          "files": [
+            { "label": "01 Home & Wish Creation", "path": "mockups/diwaliwish-screens/01-home-wish-creation.html" },
+            { "label": "02 Greeting Card", "path": "mockups/diwaliwish-screens/02-greeting-card.html" },
+            { "label": "03 My Wishes (Dashboard)", "path": "mockups/diwaliwish-screens/03-my-wishes.html" },
+            { "label": "04 Admin Panel", "path": "mockups/diwaliwish-screens/04-admin-panel.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design-systems",
+      "label": "Design Systems",
+      "groups": [
+        {
+          "slug": "diwaliwish",
+          "files": [
+            { "label": "README.md", "path": "design-systems/diwaliwish/README.md" },
+            { "label": "SKILL.md", "path": "design-systems/diwaliwish/SKILL.md" },
+            { "label": "tokens/colors_and_type.css", "path": "design-systems/diwaliwish/tokens/colors_and_type.css" },
+            { "label": "brand/voice-and-tone.md", "path": "design-systems/diwaliwish/brand/voice-and-tone.md" },
+            { "label": "brand/style-notes.md", "path": "design-systems/diwaliwish/brand/style-notes.md" },
+            { "label": "assets/logos/diwaliwish-logo.svg", "path": "design-systems/diwaliwish/assets/logos/diwaliwish-logo.svg" },
+            { "label": "assets/logos/favicon.svg", "path": "design-systems/diwaliwish/assets/logos/favicon.svg" },
+            { "label": "assets/imagery/diya.svg", "path": "design-systems/diwaliwish/assets/imagery/diya.svg" },
+            { "label": "assets/imagery/rangoli.svg", "path": "design-systems/diwaliwish/assets/imagery/rangoli.svg" },
+            { "label": "assets/imagery/flame.svg", "path": "design-systems/diwaliwish/assets/imagery/flame.svg" },
+            { "label": "assets/imagery/particle.svg", "path": "design-systems/diwaliwish/assets/imagery/particle.svg" },
+            { "label": "ui-kit-diwaliwish/index.html", "path": "design-systems/diwaliwish/ui-kit-diwaliwish/index.html" },
+            { "label": "ui-kit-diwaliwish/components/Button.jsx", "path": "design-systems/diwaliwish/ui-kit-diwaliwish/components/Button.jsx" },
+            { "label": "ui-kit-diwaliwish/components/Card.jsx", "path": "design-systems/diwaliwish/ui-kit-diwaliwish/components/Card.jsx" },
+            { "label": "ui-kit-diwaliwish/components/Input.jsx", "path": "design-systems/diwaliwish/ui-kit-diwaliwish/components/Input.jsx" },
+            { "label": "ui-kit-diwaliwish/components/DiyaAnimation.jsx", "path": "design-systems/diwaliwish/ui-kit-diwaliwish/components/DiyaAnimation.jsx" },
+            { "label": "ui-kit-diwaliwish/components/WishCard.jsx", "path": "design-systems/diwaliwish/ui-kit-diwaliwish/components/WishCard.jsx" },
+            { "label": "ui-kit-diwaliwish/components/ThemeSelector.jsx", "path": "design-systems/diwaliwish/ui-kit-diwaliwish/components/ThemeSelector.jsx" }
+          ]
+        }
+      ]
+    }
+  ]
+}

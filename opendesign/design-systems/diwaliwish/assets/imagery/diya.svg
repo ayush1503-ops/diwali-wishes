@@ -1,0 +1,11 @@
+<!-- Diya (oil lamp) placeholder — replace with real diya asset -->
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="80" viewBox="0 0 64 80" role="img" aria-label="Diya placeholder">
+  <!-- Lamp body -->
+  <path d="M 16 60 Q 32 40 48 60 L 48 70 L 16 70 Z" fill="#3E0A14" stroke="#D4AF37" stroke-width="2"/>
+  <!-- Oil reservoir -->
+  <ellipse cx="32" cy="62" rx="16" ry="8" fill="#1A0A2E"/>
+  <!-- Wick -->
+  <rect x="29" y="48" width="6" height="14" fill="#5A4A3A"/>
+  <!-- Flame placeholder -->
+  <path d="M 32 48 Q 28 32 36 30 Q 44 32 42 48" fill="#FF9F00" opacity="0.9"/>
+</svg>

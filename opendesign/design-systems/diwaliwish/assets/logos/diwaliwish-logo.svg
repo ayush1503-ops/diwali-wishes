@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80" role="img" aria-label="DiwaliWish brand logomark placeholder">
+  <rect width="200" height="80" fill="#0E0A1E" rx="12"/>
+  <circle cx="40" cy="40" r="14" fill="#D4AF37"/>
+  <path d="M 26 40 Q 40 26 54 40" stroke="#D4AF37" stroke-width="3" fill="none"/>
+  <text x="90" y="42" font-family="Cormorant, serif" font-size="28" font-weight="700" fill="#FFFFFF" letter-spacing="0.05em">DiwaliWish</text>
+  <text x="90" y="62" font-family="Montserrat, sans-serif" font-size="10" fill="#C9BBA3" letter-spacing="0.1em">Personalized Diwali Wishes</text>
+</svg>

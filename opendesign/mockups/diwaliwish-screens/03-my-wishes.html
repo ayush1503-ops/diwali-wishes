@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DiwaliWish — My Wishes (User Dashboard)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../design-systems/diwaliwish/tokens/colors_and_type.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-family: var(--dw-font-body); background: var(--dw-bg-primary); color: var(--dw-fg-primary); line-height: var(--dw-lh-normal); }
+    body { min-height: 100vh; }
+    h1, h2, h3 { font-family: var(--dw-font-heading); font-weight: var(--dw-fw-bold); line-height: var(--dw-lh-tight); letter-spacing: var(--dw-ls-tight); }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+    .dw-nav { position: fixed; top: 0; left: 0; right: 0; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; z-index: 100; background: rgba(14,10,30,0.6); backdrop-filter: blur(12px); }
+    .dw-logo { font-family: var(--dw-font-heading); font-size: var(--dw-text-xl); font-weight: var(--dw-fw-bold); color: var(--dw-fg-primary); text-decoration: none; }
+    .dw-logo span { color: var(--dw-accent-gold); }
+    .dw-nav-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+    .dw-user-avatar { width: 40px; height: 40px; border-radius: var(--dw-radius-full); background: var(--dw-accent-gold); color: var(--dw-text-ink); display: flex; align-items: center; justify-content: center; font-weight: var(--dw-fw-bold); font-family: var(--dw-font-body); font-size: var(--dw-text-base); }
+
+    .dw-hero { padding: 6rem 1.5rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .dw-hero h1 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 0.5rem; }
+    .dw-hero p { color: var(--dw-fg-secondary); font-size: var(--dw-text-lg); font-weight: var(--dw-fw-medium); }
+
+    .dw-actions { max-width: 1200px; margin: 0 auto 2rem; padding: 0 1.5rem; display: flex; gap: 1rem; justify-content: flex-end; }
+    .dw-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem 1.75rem; font-family: var(--dw-font-heading); font-weight: var(--dw-fw-bold); font-size: var(--dw-text-base); border: none; border-radius: var(--dw-radius-md); cursor: pointer; transition: all var(--dw-duration-normal) var(--dw-ease-standard); text-decoration: none; }
+    .dw-btn--primary { background: var(--dw-accent-gold); color: var(--dw-text-ink); box-shadow: var(--dw-shadow-glow); }
+    .dw-btn--primary:hover { background: #E6C866; transform: translateY(-1px); }
+    .dw-btn--ghost { background: transparent; color: var(--dw-fg-primary); border: 1px solid var(--dw-border-gold); }
+    .dw-btn--ghost:hover { background: rgba(212,175,55,0.1); }
+
+    .dw-wishes-grid { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 4rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+    .dw-wish-item { background: var(--dw-surface-card); border: 1px solid var(--dw-border-default); border-radius: var(--dw-radius-lg); padding: 1.5rem; box-shadow: var(--dw-shadow-md); transition: all var(--dw-duration-normal) var(--dw-ease-standard); cursor: pointer; display: flex; flex-direction: column; gap: 1rem; }
+    .dw-wish-item:hover { transform: translateY(-4px); box-shadow: var(--dw-shadow-lg); border-color: var(--dw-border-gold); }
+    .dw-wish-item__header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .dw-wish-item__name { font-family: var(--dw-font-heading); font-size: var(--dw-text-lg); color: var(--dw-text-ink); font-weight: var(--dw-fw-bold); }
+    .dw-wish-item__date { font-size: var(--dw-text-xs); color: var(--dw-text-muted); }
+    .dw-wish-item__theme { font-size: var(--dw-text-xs); font-weight: var(--dw-fw-medium); color: var(--dw-accent-gold); text-transform: uppercase; letter-spacing: 0.08em; }
+    .dw-wish-item__preview { width: 100%; height: 160px; border-radius: var(--dw-radius-md); background: rgba(212,175,55,0.1); border: 1px dashed var(--dw-border-gold); display: flex; align-items: center; justify-content: center; color: var(--dw-text-muted); font-size: var(--dw-text-sm); margin-bottom: 0.5rem; }
+    .dw-wish-item__actions { display: flex; gap: 0.5rem; margin-top: auto; }
+    .dw-wish-item__actions .dw-btn { flex: 1; font-size: var(--dw-text-xs); padding: 0.5rem 0.75rem; }
+
+    .dw-empty { max-width: 600px; margin: 6rem auto; padding: 0 1.5rem; text-align: center; }
+    .dw-empty h2 { font-size: var(--dw-text-2xl); margin-bottom: 1rem; color: var(--dw-text-ink); }
+    .dw-empty p { color: var(--dw-fg-secondary); font-size: var(--dw-text-lg); margin-bottom: 2rem; font-weight: var(--dw-fw-medium); }
+
+    .dw-footer { padding: 3rem 1.5rem; border-top: 1px solid var(--dw-border-gold); text-align: center; color: var(--dw-fg-secondary); font-size: var(--dw-text-sm); }
+  </style>
+</head>
+<body>
+
+  <nav class="dw-nav">
+    <a href="#" class="dw-logo">Diwali<span>Wish</span></a>
+    <div class="dw-nav-actions">
+      <div class="dw-user-avatar" aria-label="User profile">A</div>
+      <button class="dw-btn dw-btn--ghost">Create Wish</button>
+      <button class="dw-btn dw-btn--primary">Log Out</button>
+    </div>
+  </nav>
+
+  <header class="dw-hero">
+    <h1>My Wishes</h1>
+    <p>Your saved Diwali greetings &mdash; edit, favorite, or share anytime.</p>
+  </header>
+
+  <div class="dw-actions">
+    <button class="dw-btn dw-btn--primary">Create New Wish</button>
+  </div>
+
+  <section class="dw-wishes-grid">
+    <article class="dw-wish-item">
+      <div class="dw-wish-item__header">
+        <div>
+          <div class="dw-wish-item__name">Happy Diwali, Aarav!</div>
+          <div class="dw-wish-item__date">Nov 5, 2026 &bull; Leo</div>
+        </div>
+        <div class="dw-wish-item__theme">Royal Gold</div>
+      </div>
+      <div class="dw-wish-item__preview">Card preview</div>
+      <p style="font-size: var(--dw-text-sm); color: var(--dw-text-muted); line-height: var(--dw-lh-relaxed);">May your life shine as brightly as a thousand diyas.</p>
+      <div class="dw-wish-item__actions">
+        <button class="dw-btn dw-btn--ghost">Edit</button>
+        <button class="dw-btn dw-btn--ghost">Share</button>
+        <button class="dw-btn dw-btn--ghost">Download</button>
+      </div>
+    </article>
+    <article class="dw-wish-item">
+      <div class="dw-wish-item__header">
+        <div>
+          <div class="dw-wish-item__name">Happy Diwali, Priya!</div>
+          <div class="dw-wish-item__date">Nov 4, 2026 &bull; Libra</div>
+        </div>
+        <div class="dw-wish-item__theme">Traditional Diya</div>
+      </div>
+      <div class="dw-wish-item__preview">Card preview</div>
+      <p style="font-size: var(--dw-text-sm); color: var(--dw-text-muted); line-height: var(--dw-lh-relaxed);">Your kindness will light up many lives this year.</p>
+      <div class="dw-wish-item__actions">
+        <button class="dw-btn dw-btn--ghost">Edit</button>
+        <button class="dw-btn dw-btn--ghost">Share</button>
+        <button class="dw-btn dw-btn--ghost">Download</button>
+      </div>
+    </article>
+    <article class="dw-wish-item">
+      <div class="dw-wish-item__header">
+        <div>
+          <div class="dw-wish-item__name">Happy Diwali, Rohan!</div>
+          <div class="dw-wish-item__date">Nov 3, 2026 &bull; Taurus</div>
+        </div>
+        <div class="dw-wish-item__theme">Rangoli</div>
+      </div>
+      <div class="dw-wish-item__preview">Card preview</div>
+      <p style="font-size: var(--dw-text-sm); color: var(--dw-text-muted); line-height: var(--dw-lh-relaxed);">Prosperity and joy await you in the coming year.</p>
+      <div class="dw-wish-item__actions">
+        <button class="dw-btn dw-btn--ghost">Edit</button>
+        <button class="dw-btn dw-btn--ghost">Share</button>
+        <button class="dw-btn dw-btn--ghost">Download</button>
+      </div>
+    </article>
+  </section>
+
+  <footer class="dw-footer">
+    <p>DiwaliWish &mdash; Personalized Diwali Wishes &amp; Fun Predictions</p>
+  </footer>
+
+</body>
+</html>

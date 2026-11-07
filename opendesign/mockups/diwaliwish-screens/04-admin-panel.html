@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DiwaliWish — Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../design-systems/diwaliwish/tokens/colors_and_type.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-family: var(--dw-font-body); background: var(--dw-bg-maroon); color: var(--dw-fg-primary); line-height: var(--dw-lh-normal); }
+    body { min-height: 100vh; }
+    h1, h2, h3 { font-family: var(--dw-font-heading); font-weight: var(--dw-fw-bold); line-height: var(--dw-lh-tight); letter-spacing: var(--dw-ls-tight); }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+    .dw-nav { position: fixed; top: 0; left: 0; right: 0; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; z-index: 100; background: rgba(62,10,20,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--dw-border-gold); }
+    .dw-logo { font-family: var(--dw-font-heading); font-size: var(--dw-text-xl); font-weight: var(--dw-fw-bold); color: var(--dw-fg-primary); text-decoration: none; }
+    .dw-logo span { color: var(--dw-accent-gold); }
+    .dw-nav-actions { display: flex; gap: 1rem; align-items: center; }
+
+    .dw-layout { display: flex; max-width: 100vw; }
+    .dw-sidebar { width: 260px; flex-shrink: 0; padding: 2rem 1.5rem; background: rgba(62,10,20,0.95); border-right: 1px solid var(--dw-border-gold); }
+    .dw-sidebar__item { display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem 1rem; border-radius: var(--dw-radius-md); color: var(--dw-fg-secondary); text-decoration: none; font-size: var(--dw-text-sm); font-weight: var(--dw-fw-medium); transition: all var(--dw-duration-normal) var(--dw-ease-standard); margin-bottom: 0.5rem; cursor: pointer; border: 1px solid transparent; }
+    .dw-sidebar__item:hover { background: rgba(255,255,255,0.05); color: var(--dw-fg-primary); border-color: rgba(212,175,55,0.3); }
+    .dw-sidebar__item--active { background: rgba(212,175,55,0.15); color: var(--dw-accent-gold); border-color: var(--dw-border-gold); }
+
+    .dw-main { flex: 1; padding: 3rem 2rem; overflow-y: auto; }
+    .dw-page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem; }
+    .dw-page-header h1 { font-size: clamp(1.75rem, 3vw, 2.25rem); margin-bottom: 0.25rem; }
+    .dw-page-header p { color: var(--dw-fg-secondary); font-size: var(--dw-text-base); }
+
+    .dw-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+    .dw-stat-card { background: rgba(255,255,255,0.03); border: 1px solid var(--dw-border-gold); border-radius: var(--dw-radius-lg); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .dw-stat__label { font-size: var(--dw-text-xs); font-weight: var(--dw-fw-medium); color: var(--dw-fg-secondary); text-transform: uppercase; letter-spacing: 0.08em; }
+    .dw-stat__value { font-family: var(--dw-font-heading); font-size: var(--dw-text-3xl); color: var(--dw-fg-primary); font-weight: var(--dw-fw-bold); }
+
+    .dw-section { margin-bottom: 3rem; }
+    .dw-section h2 { font-size: var(--dw-text-xl); margin-bottom: 1.5rem; color: var(--dw-text-ink); }
+
+    .dw-table-wrap { background: rgba(255,255,255,0.03); border: 1px solid var(--dw-border-gold); border-radius: var(--dw-radius-lg); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; font-family: var(--dw-font-body); font-size: var(--dw-text-sm); }
+    th { text-align: left; padding: 1rem 1.25rem; color: var(--dw-fg-secondary); font-weight: var(--dw-fw-medium); border-bottom: 1px solid var(--dw-border-default); background: rgba(0,0,0,0.1); }
+    td { padding: 1rem 1.25rem; border-bottom: 1px solid var(--dw-border-default); color: var(--dw-fg-primary); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(212,175,55,0.05); }
+
+    .dw-badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0.75rem; border-radius: var(--dw-radius-full); font-size: var(--dw-text-xs); font-weight: var(--dw-fw-medium); }
+    .dw-badge--active { background: rgba(212,175,55,0.15); color: var(--dw-accent-gold); border: 1px solid rgba(212,175,55,0.3); }
+    .dw-badge--inactive { background: rgba(138,122,102,0.15); color: var(--dw-text-muted); border: 1px solid rgba(138,122,102,0.3); }
+
+    .dw-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.625rem 1.25rem; font-family: var(--dw-font-heading); font-weight: var(--dw-fw-bold); font-size: var(--dw-text-sm); border: none; border-radius: var(--dw-radius-md); cursor: pointer; transition: all var(--dw-duration-normal) var(--dw-ease-standard); text-decoration: none; }
+    .dw-btn--primary { background: var(--dw-accent-gold); color: var(--dw-text-ink); }
+    .dw-btn--primary:hover { background: #E6C866; }
+    .dw-btn--ghost { background: transparent; color: var(--dw-fg-primary); border: 1px solid var(--dw-border-gold); }
+    .dw-btn--ghost:hover { background: rgba(212,175,55,0.1); }
+    .dw-btn--danger { background: rgba(220,38,38,0.15); color: #DC2626; border: 1px solid rgba(220,38,38,0.3); }
+    .dw-btn--danger:hover { background: rgba(220,38,38,0.25); }
+
+    .dw-footer { padding: 3rem 2rem; border-top: 1px solid var(--dw-border-gold); text-align: center; color: var(--dw-fg-secondary); font-size: var(--dw-text-sm); }
+
+    @media (max-width: 768px) {
+      .dw-layout { flex-direction: column; }
+      .dw-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--dw-border-gold); }
+      .dw-main { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="dw-nav">
+    <a href="#" class="dw-logo">Diwali<span>Wish</span> Admin</a>
+    <div class="dw-nav-actions">
+      <span style="color: var(--dw-fg-secondary); font-size: var(--dw-text-sm); font-weight: var(--dw-fw-medium);">Admin Panel</span>
+      <button class="dw-btn dw-btn--ghost">Log Out</button>
+    </div>
+  </nav>
+
+  <div class="dw-layout">
+    <aside class="dw-sidebar">
+      <nav>
+        <a href="#" class="dw-sidebar__item dw-sidebar__item--active" aria-current="page">Dashboard</a>
+        <a href="#" class="dw-sidebar__item">Wish Templates</a>
+        <a href="#" class="dw-sidebar__item">Predictions</a>
+        <a href="#" class="dw-sidebar__item">Themes & Assets</a>
+        <a href="#" class="dw-sidebar__item">Users</a>
+        <a href="#" class="dw-sidebar__item">Analytics</a>
+        <a href="#" class="dw-sidebar__item">Export CSV</a>
+      </nav>
+    </aside>
+
+    <main class="dw-main">
+      <header class="dw-page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Manage wish templates, predictions, themes, and users.</p>
+        </div>
+        <button class="dw-btn dw-btn--primary">Export CSV</button>
+      </header>
+
+      <div class="dw-stats">
+        <div class="dw-stat-card">
+          <div class="dw-stat__label">Total Wishes</div>
+          <div class="dw-stat__value">1,247</div>
+        </div>
+        <div class="dw-stat-card">
+          <div class="dw-stat__label">Shares</div>
+          <div class="dw-stat__value">374</div>
+        </div>
+        <div class="dw-stat-card">
+          <div class="dw-stat__label">Downloads</div>
+          <div class="dw-stat__value">289</div>
+        </div>
+        <div class="dw-stat-card">
+          <div class="dw-stat__label">Active Users</div>
+          <div class="dw-stat__value">842</div>
+        </div>
+      </div>
+
+      <section class="dw-section">
+        <h2>Recent Wishes</h2>
+        <div class="dw-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Recipient</th>
+                <th>Theme</th>
+                <th>Status</th>
+                <th>Shares</th>
+                <th>Downloads</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Aarav S.</td>
+                <td>Royal Gold</td>
+                <td><span class="dw-badge dw-badge--active">Public</span></td>
+                <td>12</td>
+                <td>8</td>
+                <td>Nov 5, 2026</td>
+                <td>
+                  <button class="dw-btn dw-btn--ghost dw-btn--danger" style="padding: 0.4rem 0.75rem; font-size: var(--dw-text-xs);">Block</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Priya M.</td>
+                <td>Traditional Diya</td>
+                <td><span class="dw-badge dw-badge--active">Public</span></td>
+                <td>8</td>
+                <td>5</td>
+                <td>Nov 4, 2026</td>
+                <td>
+                  <button class="dw-btn dw-btn--ghost dw-btn--danger" style="padding: 0.4rem 0.75rem; font-size: var(--dw-text-xs);">Block</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Rohan K.</td>
+                <td>Rangoli</td>
+                <td><span class="dw-badge dw-badge--inactive">Private</span></td>
+                <td>0</td>
+                <td>0</td>
+                <td>Nov 3, 2026</td>
+                <td>
+                  <button class="dw-btn dw-btn--ghost dw-btn--danger" style="padding: 0.4rem 0.75rem; font-size: var(--dw-text-xs);">Block</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="dw-section">
+        <h2>Wish Templates</h2>
+        <div class="dw-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Message (preview)</th>
+                <th>Language</th>
+                <th>Active</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Prosperity</td>
+                <td>May your life shine as brightly as a thousand diyas...</td>
+                <td>English</td>
+                <td><span class="dw-badge dw-badge--active">Active</span></td>
+                <td>
+                  <button class="dw-btn dw-btn--ghost" style="padding: 0.4rem 0.75rem; font-size: var(--dw-text-xs);">Edit</button>
+                  <button class="dw-btn dw-btn--ghost dw-btn--danger" style="padding: 0.4rem 0.75rem; font-size: var(--dw-text-xs);">Disable</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Joy</td>
+                <td>Wishing you happiness, prosperity, and beautiful memories...</td>
+                <td>English</td>
+                <td><span class="dw-badge dw-badge--active">Active</span></td>
+                <td>
+                  <button class="dw-btn dw-btn--ghost" style="padding: 0.4rem 0.75rem; font-size: var(--dw-text-xs);">Edit</button>
+                  <button class="dw-btn dw-btn--ghost dw-btn--danger" style="padding: 0.4rem 0.75rem; font-size: var(--dw-text-xs);">Disable</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Light</td>
+                <td>May the light of diyas guide your path...</td>
+                <td>Hindi</td>
+                <td><span class="dw-badge dw-badge--inactive">Inactive</span></td>
+                <td>
+                  <button class="dw-btn dw-btn--ghost" style="padding: 0.4rem 0.75rem; font-size: var(--dw-text-xs);">Edit</button>
+                  <button class="dw-btn dw-btn--ghost dw-btn--danger" style="padding: 0.4rem 0.75rem; font-size: var(--dw-text-xs);">Enable</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="dw-footer">
+    <p>DiwaliWish Admin &mdash; Role-based access &bull; CSV export &bull; User management</p>
+  </footer>
+
+</body>
+</html>

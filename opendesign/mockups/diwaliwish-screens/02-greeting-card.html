@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DiwaliWish — Your Personalized Greeting Card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../design-systems/diwaliwish/tokens/colors_and_type.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-family: var(--dw-font-body); background: var(--dw-bg-primary); color: var(--dw-fg-primary); line-height: var(--dw-lh-normal); }
+    body { min-height: 100vh; }
+    h1, h2, h3 { font-family: var(--dw-font-heading); font-weight: var(--dw-fw-bold); line-height: var(--dw-lh-tight); letter-spacing: var(--dw-ls-tight); }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+    .dw-nav { position: fixed; top: 0; left: 0; right: 0; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; z-index: 100; background: rgba(14,10,30,0.6); backdrop-filter: blur(12px); }
+    .dw-logo { font-family: var(--dw-font-heading); font-size: var(--dw-text-xl); font-weight: var(--dw-fw-bold); color: var(--dw-fg-primary); text-decoration: none; }
+    .dw-logo span { color: var(--dw-accent-gold); }
+    .dw-nav-actions { display: flex; gap: 0.75rem; }
+
+    .dw-hero { padding: 6rem 1.5rem 3rem; max-width: 900px; margin: 0 auto; text-align: center; }
+    .dw-hero h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+    .dw-hero h1 span { color: var(--dw-accent-gold); }
+    .dw-hero p { color: var(--dw-fg-secondary); font-size: var(--dw-text-lg); margin-bottom: 0; font-weight: var(--dw-fw-medium); }
+
+    .dw-card-showcase { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; display: flex; justify-content: center; }
+    .dw-wish-card { position: relative; width: 100%; max-width: 400px; aspect-ratio: 3 / 4; border-radius: var(--dw-radius-xl); background: var(--dw-surface-card); border: 1px solid var(--dw-border-default); box-shadow: var(--dw-shadow-xl); overflow: hidden; perspective: 1000px; }
+    .dw-wish-card__face { position: absolute; inset: 0; backface-visibility: hidden; transition: transform var(--dw-duration-cinematic) var(--dw-ease-expo); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.5rem 2rem; text-align: center; }
+    .dw-wish-card__front { z-index: 2; }
+    .dw-wish-card__back { transform: rotateY(180deg); background: var(--dw-bg-primary); color: var(--dw-fg-primary); }
+    .dw-wish-card--flipped .dw-wish-card__front { transform: rotateY(180deg); }
+    .dw-wish-card--flipped .dw-wish-card__back { transform: rotateY(0deg); z-index: 2; }
+
+    .dw-diya-wrap { width: 48px; height: 60px; margin-bottom: 1.5rem; position: relative; }
+    .dw-diya-wrap__reservoir { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 45%; background: #3E0A14; border: 2px solid var(--dw-border-gold); border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%; }
+    .dw-diya-wrap__wick { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); width: 12%; height: 22%; background: #5A4A3A; border-radius: 2px; }
+    .dw-diya-wrap__flame { position: absolute; top: -40%; left: 50%; transform: translateX(-50%); width: 20px; height: 28px; background: #FF9F00; border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%; filter: blur(2px); animation: dw-flicker 3s ease-in-out infinite; }
+    @keyframes dw-flicker { 0%,100% { transform: translateX(-50%) scale(1); opacity: 1; } 25% { transform: translateX(-50%) scale(0.95); opacity: 0.85; } 50% { transform: translateX(-50%) scale(1.05); opacity: 1; } 75% { transform: translateX(-50%) scale(0.98); opacity: 0.9; } }
+
+    .dw-card-title { font-size: var(--dw-text-2xl); color: var(--dw-text-ink); margin-bottom: 0.5rem; }
+    .dw-card-divider { width: 32px; height: 2px; background: var(--dw-accent-gold); margin: 0.75rem auto; border-radius: 2px; }
+    .dw-card-details { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin: 1rem 0; }
+    .dw-detail { display: flex; flex-direction: column; gap: 0.25rem; }
+    .dw-detail__label { font-size: var(--dw-text-xs); color: var(--dw-text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .dw-detail__value { font-family: var(--dw-font-heading); font-size: var(--dw-text-lg); color: var(--dw-text-ink); }
+    .dw-card-prediction { font-style: italic; color: var(--dw-text-muted); margin-bottom: 1rem; font-size: var(--dw-text-base); }
+    .dw-card-wish { color: var(--dw-text-ink); font-size: var(--dw-text-lg); font-weight: var(--dw-fw-medium); line-height: var(--dw-lh-relaxed); }
+
+    .dw-back-title { font-family: var(--dw-font-heading); font-size: var(--dw-text-xl); margin-bottom: 1rem; }
+    .dw-back-message { color: var(--dw-fg-secondary); margin-bottom: 2rem; font-size: var(--dw-text-base); }
+
+    .dw-actions { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .dw-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem 1.75rem; font-family: var(--dw-font-heading); font-weight: var(--dw-fw-bold); font-size: var(--dw-text-base); border: none; border-radius: var(--dw-radius-md); cursor: pointer; transition: all var(--dw-duration-normal) var(--dw-ease-standard); text-decoration: none; }
+    .dw-btn--primary { background: var(--dw-accent-gold); color: var(--dw-text-ink); box-shadow: var(--dw-shadow-glow); }
+    .dw-btn--primary:hover { background: #E6C866; transform: translateY(-1px); }
+    .dw-btn--ghost { background: transparent; color: var(--dw-fg-primary); border: 1px solid var(--dw-border-gold); }
+    .dw-btn--ghost:hover { background: rgba(212,175,55,0.1); }
+
+    .dw-share-hint { max-width: 900px; margin: 0 auto 4rem; padding: 0 1.5rem; text-align: center; color: var(--dw-fg-secondary); font-size: var(--dw-text-sm); }
+
+    .dw-footer { padding: 3rem 1.5rem; border-top: 1px solid var(--dw-border-gold); text-align: center; color: var(--dw-fg-secondary); font-size: var(--dw-text-sm); }
+  </style>
+</head>
+<body>
+
+  <nav class="dw-nav">
+    <a href="#" class="dw-logo">Diwali<span>Wish</span></a>
+    <div class="dw-nav-actions">
+      <button class="dw-btn dw-btn--ghost" onclick="toggleCard()">Flip Card</button>
+      <button class="dw-btn dw-btn--primary">Download Card</button>
+    </div>
+  </nav>
+
+  <header class="dw-hero">
+    <h1>Your Diwali Wish, <span>Personalized</span></h1>
+    <p>Created for Aarav &bull; Leo &bull; Lucky Number 7</p>
+  </header>
+
+  <section class="dw-card-showcase">
+    <div class="dw-wish-card" id="dw-wish-card">
+      <div class="dw-wish-card__face dw-wish-card__front">
+        <div class="dw-diya-wrap">
+          <div class="dw-diya-wrap__reservoir"></div>
+          <div class="dw-diya-wrap__wick"></div>
+          <div class="dw-diya-wrap__flame"></div>
+        </div>
+        <h2 class="dw-card-title">Happy Diwali, Aarav!</h2>
+        <div class="dw-card-divider"></div>
+        <div class="dw-card-details">
+          <div class="dw-detail">
+            <span class="dw-detail__label">Zodiac Sign</span>
+            <span class="dw-detail__value">Leo</span>
+          </div>
+          <div class="dw-detail">
+            <span class="dw-detail__label">Lucky Color</span>
+            <span class="dw-detail__value">Gold</span>
+          </div>
+          <div class="dw-detail">
+            <span class="dw-detail__label">Lucky Number</span>
+            <span class="dw-detail__value">7</span>
+          </div>
+          <div class="dw-detail">
+            <span class="dw-detail__label">Personality Trait</span>
+            <span class="dw-detail__value">Confident Leader</span>
+          </div>
+        </div>
+        <p class="dw-card-prediction">Your confidence will open exciting doors for you this year.</p>
+        <p class="dw-card-wish">May your life shine as brightly as a thousand diyas. Wishing you happiness, prosperity, and beautiful memories.</p>
+      </div>
+      <div class="dw-wish-card__face dw-wish-card__back">
+        <h2 class="dw-back-title">From the Heart</h2>
+        <p class="dw-back-message">This wish was created just for you, Aarav. May your Diwali be filled with light, joy, and prosperity.</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="dw-share-hint">Share via WhatsApp &bull; Copy link &bull; Save to My Wishes (log in)</p>
+
+  <footer class="dw-footer">
+    <p>DiwaliWish &mdash; Personalized Diwali Wishes &amp; Fun Predictions</p>
+  </footer>
+
+  <script>
+    let isFlipped = false;
+    function toggleCard() {
+      const card = document.getElementById('dw-wish-card');
+      isFlipped = !isFlipped;
+      card.classList.toggle('dw-wish-card--flipped');
+    }
+  </script>
+</body>
+</html>

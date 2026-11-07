@@ -1,0 +1,209 @@
+/* ==========================================================================
+   DiwaliWish Design Tokens
+   Premium, modern Indian festive design system
+   ========================================================================== */
+
+/* ------------------------------------------------------------------------
+   1. PRIMITIVE RAW COLORS
+   ------------------------------------------------------------------------ */
+
+/* Backgrounds */
+--dw-bg-midnight: #0E0A1E;        /* deep midnight purple */
+--dw-bg-midnight-oklch: oklch(18% 0.025 285);
+--dw-bg-maroon: #3E0A14;          /* warm maroon */
+--dw-bg-maroon-oklch: oklch(18% 0.025 15);
+
+/* Accents — share chroma (0.18) and lightness (72%), only hue varies */
+--dw-accent-gold-oklch: oklch(72% 0.18 55);     /* rich gold */
+--dw-accent-amber-oklch: oklch(72% 0.18 42);    /* warm amber */
+--dw-accent-saffron-oklch: oklch(72% 0.18 32);  /* saffron */
+
+--dw-accent-gold: #D4AF37;
+--dw-accent-amber: #FF9F00;
+--dw-accent-saffron: #FF9933;
+
+--dw-accent-glow-gold: rgba(212, 175, 55, 0.35);
+--dw-accent-glow-amber: rgba(255, 159, 0, 0.35);
+--dw-accent-glow-saffron: rgba(255, 153, 51, 0.35);
+
+/* Neutral / surface */
+--dw-surface-paper: #F7F1E8;      /* warm off-white card surface */
+--dw-surface-elevated: #FFFFFF;   /* pure white for modals */
+--dw-text-ink: #1A0A2E;           /* near-black ink on light surfaces */
+--dw-text-ink-light: #FFFFFF;     /* white text on dark backgrounds */
+--dw-text-muted: #8A7A66;         /* muted warm gray */
+--dw-border-subtle: #C9BBA3;      /* soft warm border */
+--dw-border-gold: rgba(212, 175, 55, 0.4);
+
+/* ------------------------------------------------------------------------
+   2. SEMANTIC COLORS (purpose aliases)
+   ------------------------------------------------------------------------ */
+
+--dw-bg-primary: var(--dw-bg-midnight);
+--dw-bg-secondary: var(--dw-bg-maroon);
+--dw-bg-contrast: var(--dw-surface-paper);
+
+--dw-fg-primary: var(--dw-text-ink-light);
+--dw-fg-secondary: var(--dw-text-muted);
+--dw-fg-inverse: var(--dw-text-ink);
+
+--dw-accent-primary: var(--dw-accent-gold);
+--dw-accent-primary-oklch: var(--dw-accent-gold-oklch);
+--dw-accent-secondary: var(--dw-accent-amber);
+--dw-accent-tertiary: var(--dw-accent-saffron);
+
+--dw-glow-primary: var(--dw-accent-glow-gold);
+
+--dw-surface-card: var(--dw-surface-paper);
+--dw-surface-modal: var(--dw-surface-elevated);
+
+--dw-border-default: var(--dw-border-subtle);
+--dw-border-accent: var(--dw-border-gold);
+
+/* ------------------------------------------------------------------------
+   3. COMPONENT TOKENS
+   ------------------------------------------------------------------------ */
+
+/* Buttons */
+--dw-btn-primary-bg: var(--dw-accent-gold);
+--dw-btn-primary-fg: var(--dw-text-ink);
+--dw-btn-primary-hover-bg: #E6C866;
+--dw-btn-ghost-bg: transparent;
+--dw-btn-ghost-fg: var(--dw-text-ink-light);
+--dw-btn-ghost-border: var(--dw-border-gold);
+
+/* Cards */
+--dw-card-bg: var(--dw-surface-paper);
+--dw-card-border: var(--dw-border-subtle);
+--dw-card-shadow: 0 8px 24px rgba(14, 10, 30, 0.15);
+--dw-card-shadow-hover: 0 16px 40px rgba(14, 10, 30, 0.25);
+--dw-card-radius: 16px;
+
+/* Inputs */
+--dw-input-bg: var(--dw-surface-elevated);
+--dw-input-border: var(--dw-border-subtle);
+--dw-input-focus-ring: var(--dw-accent-gold);
+--dw-input-radius: 12px;
+
+/* Badges / tags */
+--dw-badge-bg: var(--dw-accent-gold);
+--dw-badge-fg: var(--dw-text-ink);
+--dw-badge-radius: 20px;
+
+/* ------------------------------------------------------------------------
+   4. TYPOGRAPHY
+   ------------------------------------------------------------------------ */
+
+/* Font families */
+--dw-font-heading: "Cormorant", serif;
+--dw-font-body: "Montserrat", sans-serif;
+--dw-font-display: "Cormorant", serif;
+
+/* Font weights */
+--dw-fw-regular: 400;
+--dw-fw-medium: 500;
+--fw-semibold: 600;
+--dw-fw-bold: 700;
+
+/* Type scale (fluid, clamp-based) */
+--dw-text-xs: clamp(0.75rem, 0.7rem + 0.1vw, 0.875rem);
+--dw-text-sm: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
+--dw-text-base: clamp(1rem, 0.9rem + 0.3vw, 1.125rem);
+--dw-text-lg: clamp(1.125rem, 1rem + 0.4vw, 1.5rem);
+--dw-text-xl: clamp(1.5rem, 1.25rem + 0.6vw, 2rem);
+--dw-text-2xl: clamp(2rem, 1.75rem + 1vw, 3rem);
+--dw-text-3xl: clamp(3rem, 2.5rem + 2vw, 4.5rem);
+--dw-text-4xl: clamp(4rem, 3.5rem + 3vw, 6rem);
+
+/* Line heights */
+--dw-lh-tight: 1.2;
+--dw-lh-normal: 1.5;
+--dw-lh-relaxed: 1.75;
+
+/* Letter spacing */
+--dw-ls-tight: -0.02em;
+--dw-ls-normal: 0em;
+--dw-ls-wide: 0.08em;
+
+/* ------------------------------------------------------------------------
+   5. SPACING
+   ------------------------------------------------------------------------ */
+
+--dw-space-1: 0.25rem;   /* 4px */
+--dw-space-2: 0.5rem;    /* 8px */
+--dw-space-3: 0.75rem;   /* 12px */
+--dw-space-4: 1rem;      /* 16px */
+--dw-space-5: 1.25rem;   /* 20px */
+--dw-space-6: 1.5rem;    /* 24px */
+--dw-space-8: 2rem;      /* 32px */
+--dw-space-10: 2.5rem;   /* 40px */
+--dw-space-12: 3rem;     /* 48px */
+--dw-space-16: 4rem;     /* 64px */
+--dw-space-20: 5rem;     /* 80px */
+
+/* ------------------------------------------------------------------------
+   6. BORDERS, RADIUS, SHADOWS
+   ------------------------------------------------------------------------ */
+
+--dw-radius-sm: 8px;
+--dw-radius-md: 12px;
+--dw-radius-lg: 16px;
+--dw-radius-xl: 24px;
+--dw-radius-full: 9999px;
+
+--dw-shadow-sm: 0 2px 6px rgba(14, 10, 30, 0.08);
+--dw-shadow-md: 0 8px 24px rgba(14, 10, 30, 0.12);
+--dw-shadow-lg: 0 16px 40px rgba(14, 10, 30, 0.18);
+--dw-shadow-glow: 0 0 30px rgba(212, 175, 55, 0.25);
+
+/* ------------------------------------------------------------------------
+   7. MOTION / ANIMATION
+   ------------------------------------------------------------------------ */
+
+--dw-duration-fast: 150ms;
+--dw-duration-normal: 300ms;
+--dw-duration-slow: 500ms;
+--dw-duration-cinematic: 800ms;
+
+--dw-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+--dw-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+--dw-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+--dw-ease-flicker: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+/* Diya flicker animation */
+--dw-flicker-duration: 3s;
+
+/* ------------------------------------------------------------------------
+   8. SEMANTIC COMPONENT ALIASES (ready for direct use)
+   ------------------------------------------------------------------------ */
+
+--dw-h1: var(--dw-text-4xl);
+--dw-h2: var(--dw-text-3xl);
+--dw-h3: var(--dw-text-2xl);
+--dw-body: var(--dw-text-base);
+--dw-caption: var(--dw-text-sm);
+
+--dw-surface-primary: var(--dw-bg-primary);
+--dw-surface-secondary: var(--dw-bg-secondary);
+--dw-border-default: var(--dw-border-default);
+
+/* ------------------------------------------------------------------------
+   9. GOOGLE FONTS IMPORT
+   ------------------------------------------------------------------------ */
+/*
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+*/
+
+/* Apply base font */
+html {
+  font-family: var(--dw-font-body);
+  font-weight: var(--dw-fw-regular);
+  line-height: var(--dw-lh-normal);
+}
+
+h1, h2, h3, h4, .dw-heading {
+  font-family: var(--dw-font-heading);
+  font-weight: var(--dw-fw-bold);
+  line-height: var(--dw-lh-tight);
+  letter-spacing: var(--dw-ls-tight);
+}

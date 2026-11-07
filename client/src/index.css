@@ -1,0 +1,75 @@
+/* Import DiwaliWish design system tokens */
+@import url("./styles/design-tokens.css");
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--dw-font-body);
+  }
+  h1, h2, h3, h4, .dw-heading {
+    font-family: var(--dw-font-heading);
+    font-weight: var(--dw-fw-bold);
+    line-height: var(--dw-lh-tight);
+    letter-spacing: var(--dw-ls-tight);
+  }
+  body {
+    background-color: var(--dw-bg-primary);
+    color: var(--dw-fg-primary);
+  }
+}
+
+@layer utilities {
+  .dw-text-xs { font-size: var(--dw-text-xs); }
+  .dw-text-sm { font-size: var(--dw-text-sm); }
+  .dw-text-base { font-size: var(--dw-text-base); }
+  .dw-text-lg { font-size: var(--dw-text-lg); }
+  .dw-text-xl { font-size: var(--dw-text-xl); }
+  .dw-text-2xl { font-size: var(--dw-text-2xl); }
+  .dw-text-3xl { font-size: var(--dw-text-3xl); }
+  .dw-text-4xl { font-size: var(--dw-text-4xl); }
+
+  .dw-bg-midnight { background-color: var(--dw-bg-midnight); }
+  .dw-bg-maroon { background-color: var(--dw-bg-maroon); }
+  .dw-surface-paper { background-color: var(--dw-surface-paper); }
+  .dw-accent-gold { color: var(--dw-accent-gold); }
+  .dw-bg-accent-gold { background-color: var(--dw-accent-gold); }
+  .dw-text-ink { color: var(--dw-text-ink); }
+  .dw-text-ink-light { color: var(--dw-text-ink-light); }
+  .dw-text-muted { color: var(--dw-text-muted); }
+  .dw-border-gold { border-color: var(--dw-border-gold); }
+  .dw-shadow-glow { box-shadow: var(--dw-shadow-glow); }
+
+  .font-heading { font-family: var(--dw-font-heading); }
+  .font-body { font-family: var(--dw-font-body); }
+
+  @keyframes dw-flicker {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    25% { transform: scale(0.95); opacity: 0.85; }
+    50% { transform: scale(1.05); opacity: 1; }
+    75% { transform: scale(0.98); opacity: 0.9; }
+  }
+  .animate-flicker {
+    animation: dw-flicker 3s ease-in-out infinite;
+  }
+
+  @keyframes dw-float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+  .animate-float {
+    animation: dw-float linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-flicker, .animate-float {
+      animation: none !important;
+    }
+  }
+}
