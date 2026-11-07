@@ -75,6 +75,12 @@ app.use((err, _req, res, _next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`DiwaliWish server running on http://localhost:${PORT}`);
-});
+// Export app for Vercel serverless (Express framework)
+export default app;
+
+// Only listen on a port when running standalone (not on Vercel)
+if (process.env.VERCEL !== "1") {
+  app.listen(PORT, () => {
+    console.log(`DiwaliWish server running on http://localhost:${PORT}`);
+  });
+}
